@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微分積分学第一 期末 練習問題集（詳しい解説版）</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+  :root{
+    --bg:#f4f6f9; --card:#ffffff; --ink:#1f2933; --muted:#66707a;
+    --line:#e2e8f0; --accent:#2563eb; --accent-soft:#eff4ff;
+    --ans-bg:#f0f9f2; --ans-line:#bfe3c8; --ans-head:#1b7a3d;
+    --tip-bg:#fff7ed; --tip-line:#fdba74; --tip-head:#b45309;
+    --step:#e7f0ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.85; padding-bottom:80px;}
+  header.top{background:linear-gradient(135deg,#065f46,#0d9488); color:#fff; padding:28px 20px; text-align:center;}
+  header.top h1{margin:0 0 6px; font-size:1.5rem}
+  header.top p{margin:2px 0; opacity:.92; font-size:.9rem}
+  .wrap{max-width:920px; margin:0 auto; padding:20px 16px}
+  .toc{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:24px;}
+  .toc h2{margin:0 0 10px; font-size:1rem; color:var(--muted)}
+  .toc ol{margin:0; padding-left:1.3em}
+  .toc a{color:var(--accent); text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .tag{color:var(--muted); font-size:.8rem}
+  .theme{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 22px 10px;
+    margin-bottom:26px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .theme h2{margin:0 0 2px; font-size:1.18rem; color:#0f5132; border-bottom:2px solid #d1fae5; padding-bottom:8px;}
+  .theme .covers{color:var(--muted); font-size:.82rem; margin:0 0 12px}
+  .tip{background:var(--tip-bg); border:1px solid var(--tip-line); border-radius:10px; padding:0 16px; margin:0 0 16px;}
+  .tip > summary{font-weight:700; color:var(--tip-head); cursor:pointer; padding:12px 2px; list-style:none; user-select:none; outline:none;}
+  .tip > summary::-webkit-details-marker{display:none}
+  .tip > summary::before{content:"▸ "}
+  .tip[open] > summary::before{content:"▾ "}
+  .tip[open]{padding-bottom:12px}
+  .tip .h{font-weight:700; color:var(--tip-head); margin:0 0 6px}
+  .tip p{margin:6px 0}
+  .method{background:#eef4ff; border:1px solid #93b4f5; border-radius:10px; padding:0 16px; margin:0 0 16px;}
+  .method > summary{font-weight:700; color:#1e40af; cursor:pointer; padding:12px 2px; list-style:none; user-select:none; outline:none;}
+  .method > summary::-webkit-details-marker{display:none}
+  .method > summary::before{content:"▸ "}
+  .method[open] > summary::before{content:"▾ "}
+  .method[open]{padding-bottom:12px}
+  .method .h{font-weight:700; color:#1e40af; margin:0 0 6px}
+  .method p{margin:6px 0}
+  .method .warn{background:#fff5f5; border-left:3px solid #f87171; padding:6px 10px; margin:8px 0; color:#7f1d1d}
+  .prob{border-top:1px dashed var(--line); padding:16px 0 4px;}
+  .prob:first-of-type{border-top:none}
+  .prob .q{margin:0 0 6px}
+  .prob .q .num{font-weight:700; color:#0f5132; margin-right:6px}
+  details.sol{background:var(--ans-bg); border:1px solid var(--ans-line); border-radius:10px; margin:10px 0 6px; padding:0 16px;}
+  details.sol summary{cursor:pointer; padding:10px 4px; font-weight:600; color:var(--ans-head);
+    list-style:none; user-select:none; outline:none;}
+  details.sol summary::-webkit-details-marker{display:none}
+  details.sol summary::before{content:"▸ 解答・解説を表示"; }
+  details.sol[open] summary::before{content:"▾ 解答・解説"; }
+  .sol .body{padding:4px 4px 16px; border-top:1px solid var(--ans-line)}
+  .sol .body p{margin:9px 0}
+  .step{font-weight:700; color:#0f5132; background:var(--step); border-radius:5px; padding:1px 8px; margin-right:4px; font-size:.9em}
+  .ans{margin-top:12px; padding:9px 13px; background:#fff; border-left:4px solid var(--ans-head); border-radius:4px; font-weight:600;}
+  .note{color:var(--tip-head); font-size:.9em}
+  .why{color:#475569; font-size:.93em; background:#f8fafc; border-left:3px solid #cbd5e1; padding:4px 10px; margin:8px 0;}
+  ul.cl{margin:6px 0}
+  ul.cl li{margin:3px 0}
+  @media print{details.sol{background:#fff} body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>微分積分学第一 &nbsp;練習問題集（詳しい解説版）</h1>
+  <p>過去問（馬先生ほか）で使う解法をすべて網羅 &middot; 途中式・理由を省略せず解説</p>
+  <p>各テーマの「解法のポイント」で公式を導出 &middot; 各問は手順ごとに追えます</p>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>テーマ一覧（クリックで移動）</h2>
+    <ol>
+      <li><a href="#t1">極座標変換（偏微分の書き換え）</a> <span class="tag">← 2022B①/2023H①/2025A③/2022H②</span></li>
+      <li><a href="#t2">体積（球座標・円筒座標）</a> <span class="tag">← 2022B②/2022D①/2023①/2023H②/2025L①/2025A①/2022H①</span></li>
+      <li><a href="#t3">2変数関数の極値</a> <span class="tag">← 2022D②/2023②/2025L②/2025A②/2022H③</span></li>
+      <li><a href="#t4">極限（2次形式・多項式の商）</a> <span class="tag">← 2022B③/2023H③/2023③</span></li>
+      <li><a href="#t5">広義積分の収束</a> <span class="tag">← 2022D③</span></li>
+      <li><a href="#t6">ガンマ関数と関連積分</a> <span class="tag">← 2025L③</span></li>
+    </ol>
+    <p class="note" style="margin:8px 0 0">まず「解法のポイント」を読み、手を動かして解いてから解答を開くのがおすすめ。<span class="step">手順</span>タグと <span class="why">なぜそうするか</span> の囲みで、各ステップの意味も追えるようにしています。</p>
+  </nav>
+
+  <!-- ===== テーマ1 ===== -->
+  <section class="theme" id="t1">
+    <h2>テーマ1 ── 極座標変換（偏微分の書き換え）</h2>
+    <p class="covers">対応する過去問：2022B 問1／2023H 問1／2025A 問3／2022H 問2</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>なにをする問題か：</b>「\(x,y\) での微分（\(\partial_x,\partial_y\)）」で書かれた式を、「\(r,\theta\) での微分（\(f_r,f_\theta,\dots\)）」に翻訳する。翻訳の道具は<b>連鎖律</b>だけ。</p>
+      <p><b>土台の式（毎回ここから出発）：</b>\(r=\sqrt{x^2+y^2},\ \theta=\arctan\dfrac yx\) を \(x\) で微分すると
+      \[ r_x=\frac{x}{\sqrt{x^2+y^2}}=\frac xr=\cos\theta,\qquad
+         \theta_x=\frac{1}{1+(y/x)^2}\cdot\Big(-\frac{y}{x^2}\Big)=-\frac{y}{x^2+y^2}=-\frac{\sin\theta}r. \]
+      同様に \(r_y=\dfrac yr=\sin\theta,\ \theta_y=\dfrac{x}{x^2+y^2}=\dfrac{\cos\theta}r\)。よって連鎖律 \(f_x=f_r r_x+f_\theta\theta_x\) から
+      \[ \boxed{\,f_x=\cos\theta\,f_r-\frac{\sin\theta}{r}f_\theta,\qquad f_y=\sin\theta\,f_r+\frac{\cos\theta}{r}f_\theta.\,} \]
+      演算子だけ取り出すと \(\partial_x=\cos\theta\,\partial_r-\dfrac{\sin\theta}{r}\partial_\theta,\quad\partial_y=\sin\theta\,\partial_r+\dfrac{\cos\theta}{r}\partial_\theta\)。<b>2階微分はこの演算子をもう一度作用させる</b>だけ（問1-4）。</p>
+      <p><b>覚えておくと速い定番：</b>動径 \(xf_x+yf_y=rf_r\)、角 \(xf_y-yf_x=f_\theta\)、ラプラシアン \(f_{xx}+f_{yy}=f_{rr}+\tfrac1r f_r+\tfrac1{r^2}f_{\theta\theta}\)、勾配 \(f_x^2+f_y^2=f_r^2+\tfrac1{r^2}f_\theta^2\)。</p>
+    </details>
+
+    <details class="method">
+      <summary>◆ 演算子法（オペレーター法）── 定義と厳密な導出（クリックで展開）</summary>
+      <p>「演算子だけ取り出す」を曖昧にしないため、まず言葉を定義する。</p>
+
+      <p><b>定義1（微分作用素）</b> 関数を関数へ写す<b>線形</b>写像を作用素という。1階線形微分作用素とは、係数<b>関数</b> \(a(x,y),b(x,y)\) を用いて
+      \(L=a\,\partial_x+b\,\partial_y\) と書けるもので、その意味は各点 \(P\) で \((Lf)(P)=a(P)\,f_x(P)+b(P)\,f_y(P)\)。線形性 \(L(\alpha f+\beta g)=\alpha Lf+\beta Lg\) を満たす。</p>
+
+      <p><b>定義2（作用素の相等）</b> \(L=M\) とは「<b>任意の</b> \(C^2\) 級関数 \(f\) に対して \(Lf=Mf\)」の意味。したがって「\(\partial_x=\cos\theta\,\partial_r-\tfrac{\sin\theta}r\partial_\theta\)」という等式は、両辺を任意の \(f\) に施した結果が一致するという主張であって、記号遊びではない。この「関数を外して作用素どうしを等号で結ぶ」ことが演算子法の中身。</p>
+
+      <p><b>定義3（合成）</b> 作用素の積（合成）は \((LM)f:=L(Mf)\)（右から順に作用）。一般に \(LM\ne ML\)。</p>
+
+      <p><b>厳密な導出（座標変換）</b> \(x=r\cos\theta,\ y=r\sin\theta\ (r>0)\)。1つの関数 \(u\) を \((x,y)\) 形・\((r,\theta)\) 形の両方で見て、それぞれの偏微分を \(u_x,u_y\) と \(u_r,u_\theta\) で表す。<b>行列が出る所を1歩ずつ</b>追う。</p>
+
+      <p><span class="step">手順1（連鎖律をそのまま書く）</span> \((r,\theta)\) 形の \(u\) は \(u(r\cos\theta,\ r\sin\theta)\)。これを \(r,\theta\) で微分する。合成関数の微分（連鎖律）で、\(x,y\) を経由して
+      \[ u_r=u_x\,\frac{\partial x}{\partial r}+u_y\,\frac{\partial y}{\partial r},\qquad
+         u_\theta=u_x\,\frac{\partial x}{\partial\theta}+u_y\,\frac{\partial y}{\partial\theta}. \]</p>
+
+      <p><span class="step">手順2（\(x,y\) の偏微分を入れる）</span> \(x=r\cos\theta,\ y=r\sin\theta\) より
+      \(\dfrac{\partial x}{\partial r}=\cos\theta,\ \dfrac{\partial y}{\partial r}=\sin\theta,\ \dfrac{\partial x}{\partial\theta}=-r\sin\theta,\ \dfrac{\partial y}{\partial\theta}=r\cos\theta\)。手順1 に代入すると、\(u_x,u_y\) についての<b>2本の1次式</b>：
+      \[ u_r=\cos\theta\;u_x+\sin\theta\;u_y,\qquad u_\theta=-r\sin\theta\;u_x+r\cos\theta\;u_y. \]</p>
+
+      <p><span class="step">手順3（2本の式を行列に束ねる）</span> この2式は「係数を並べた行列 \(\times\ (u_x,u_y)\)」と<b>同じもの</b>。実際、右辺の行列積を計算すると1行目・2行目がちょうど上の2式に戻る：
+      \[ \begin{pmatrix}u_r\\ u_\theta\end{pmatrix}
+        =\underbrace{\begin{pmatrix}\cos\theta & \sin\theta\\ -r\sin\theta & r\cos\theta\end{pmatrix}}_{\displaystyle M}
+        \begin{pmatrix}u_x\\ u_y\end{pmatrix}. \]
+      （行列 \(M\) の成分は「\(x,y\) を \(r,\theta\) で微分したもの」＝ヤコビ行列。1行目 \(\cos\theta\cdot u_x+\sin\theta\cdot u_y=u_r\)、2行目 \(-r\sin\theta\cdot u_x+r\cos\theta\cdot u_y=u_\theta\) と、行列積の定義どおり。）</p>
+
+      <p><span class="step">手順4（欲しいのは逆向きなので"解く"）</span> 手順3 は「\((u_r,u_\theta)\) を \((u_x,u_y)\) で表した式」。だが作りたいのは逆、\(\partial_x,\partial_y\) を \(r,\theta\) で表す式。そこで \((u_x,u_y)\) を<b>未知数</b>とみて連立1次方程式を解く。行列では、両辺に左から \(M^{-1}\) を掛ければ左辺の \(M\) が消えて \((u_x,u_y)\) が取り出せる：
+      \[ M^{-1}\begin{pmatrix}u_r\\ u_\theta\end{pmatrix}
+        =\underbrace{M^{-1}M}_{=\,I}\begin{pmatrix}u_x\\ u_y\end{pmatrix}
+        =\begin{pmatrix}u_x\\ u_y\end{pmatrix}. \]</p>
+
+      <p><span class="step">手順5（\(M^{-1}\) を \(2\times2\) の公式で）</span> \(\begin{pmatrix}a&b\\ c&d\end{pmatrix}^{-1}=\dfrac1{ad-bc}\begin{pmatrix}d&-b\\ -c&a\end{pmatrix}\)。いま \(a=\cos\theta,\ b=\sin\theta,\ c=-r\sin\theta,\ d=r\cos\theta\) だから、まず行列式
+      \[ \det M=ad-bc=\cos\theta\cdot r\cos\theta-\sin\theta\cdot(-r\sin\theta)=r(\cos^2\theta+\sin^2\theta)=r. \]
+      よって（\(-b=-\sin\theta,\ -c=r\sin\theta\) に注意して）
+      \[ M^{-1}=\frac1r\begin{pmatrix}r\cos\theta & -\sin\theta\\ r\sin\theta & \cos\theta\end{pmatrix}
+        =\begin{pmatrix}\cos\theta & -\dfrac{\sin\theta}{r}\\[6pt] \sin\theta & \dfrac{\cos\theta}{r}\end{pmatrix}. \]
+      分母の \(1/r\) は、この \(\dfrac1{\det M}=\dfrac1r\) が全成分に掛かることから現れる（\(r=0\) だと \(\det M=0\) で逆行列が存在せず、極座標が退化する）。</p>
+
+      <p><span class="step">手順6（読み取る）</span> 手順4・5 を合わせ、右辺の行列積を展開すると
+      \[ \begin{pmatrix}u_x\\ u_y\end{pmatrix}
+        =\begin{pmatrix}\cos\theta & -\dfrac{\sin\theta}{r}\\[6pt] \sin\theta & \dfrac{\cos\theta}{r}\end{pmatrix}
+         \begin{pmatrix}u_r\\ u_\theta\end{pmatrix}
+        \;\Longrightarrow\;
+        \begin{cases} u_x=\cos\theta\,u_r-\dfrac{\sin\theta}{r}\,u_\theta,\\[6pt]
+                      u_y=\sin\theta\,u_r+\dfrac{\cos\theta}{r}\,u_\theta.\end{cases} \]
+      これは<b>任意の</b> \(u\) について成り立つので、定義2の意味で作用素の等式が得られる：
+      \[ \boxed{\ \partial_x=\cos\theta\,\partial_r-\frac{\sin\theta}{r}\partial_\theta,\qquad
+                    \partial_y=\sin\theta\,\partial_r+\frac{\cos\theta}{r}\partial_\theta.\ } \]</p>
+
+      <p class="why"><b>行列を使う意味：</b>連鎖律は「極座標の微分 \(u_r,u_\theta\) を、直交座標の微分 \(u_x,u_y\) で表す」形（手順1–3）で自然に出る。欲しいのはその<b>逆</b>なので、連立1次方程式を解く＝行列 \(M\) を逆にする、という操作をしているだけ。<b>検算：</b>\(M^{-1}M=I\) を計算する、あるいは手順6 の \(u_x,u_y\) を手順2 に代入し直して \(u_r,u_\theta\) に戻ることを確かめるとよい。</p>
+
+      <div class="warn"><b>⚠ 合成の厳密な規則 ──「係数も微分される」の正体：</b>関数 \(a\) を<b>掛け算作用素</b> \((a\,\cdot)\) とみなすと、ライプニッツ則 \(\partial_r(af)=(\partial_r a)f+a\,\partial_r f\) は作用素の等式
+      \[ \partial_r\circ(a\,\cdot)=(\partial_r a)\,\cdot\;+\;(a\,\cdot)\circ\partial_r,
+         \quad\text{すなわち交換子}\quad [\partial_r,\,a]=\partial_r a. \]
+      つまり微分作用素と係数（掛け算）は<b>交換しない</b>。ゆえに \(L=a\,\partial_r,\ M=b\,\partial_r\) の合成は
+      \[ LM=a\,\partial_r(b\,\partial_r)=a(\partial_r b)\,\partial_r+ab\,\partial_r^2 \]
+      となり、\(ab\,\partial_r^2\) だけには<b>ならない</b>。この \(a(\partial_r b)\partial_r\) が「係数を微分した項」の厳密な出所。</div>
+
+      <p><b>線形結合には非可換性は現れない：</b>\(x\partial_y-y\partial_x\) のように作用素を足す（合成でない）だけなら上の問題は起きない。代入して整理すると
+      \[ x\partial_y-y\partial_x=r\cos\theta\Big(\sin\theta\,\partial_r+\tfrac{\cos\theta}r\partial_\theta\Big)-r\sin\theta\Big(\cos\theta\,\partial_r-\tfrac{\sin\theta}r\partial_\theta\Big)=\partial_\theta \]
+      （\(\partial_r\) の係数 \(r\cos\theta\sin\theta-r\sin\theta\cos\theta=0\)、\(\partial_\theta\) の係数 \(\cos^2\theta+\sin^2\theta=1\)）。</p>
+
+      <p><b>合成が現れる例：</b>2階作用素 \(\partial_x^2,\partial_y^2\) を作って足すのが<b>ラプラシアン</b>（問1-4）。そこでは上の交換子の項（係数微分項）が効き、最終的に \(\partial_{r\theta}\) と \(\partial_\theta\) の項が相殺して \(\partial_r^2+\tfrac1r\partial_r+\tfrac1{r^2}\partial_\theta^2\) にまとまる。まず問1-4 を演算子法で追い、問1-7 で合成の規則を自分の手で確かめよう。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問1-1.</span> \(f_x,\ f_y\) を \(r,\theta,f_r,f_\theta\) で表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> \(r,\theta\) を \(x,y\) で微分する。<br>
+        \(r=\sqrt{x^2+y^2}\) より \(r_x=\dfrac{2x}{2\sqrt{x^2+y^2}}=\dfrac xr=\cos\theta\)。<br>
+        \(\theta=\arctan\dfrac yx\) より \(\theta_x=\dfrac{1}{1+(y/x)^2}\cdot\dfrac{d}{dx}\!\Big(\dfrac yx\Big)=\dfrac{x^2}{x^2+y^2}\cdot\Big(-\dfrac{y}{x^2}\Big)=-\dfrac{y}{r^2}=-\dfrac{\sin\theta}{r}\)。</p>
+        <p><span class="step">手順2</span> 連鎖律 \(f_x=f_r\,r_x+f_\theta\,\theta_x\) に代入。\(y\) についても同様（\(r_y=\sin\theta,\ \theta_y=\cos\theta/r\)）。</p>
+        <div class="ans">\(f_x=\cos\theta\,f_r-\dfrac{\sin\theta}{r}\,f_\theta,\qquad f_y=\sin\theta\,f_r+\dfrac{\cos\theta}{r}\,f_\theta\)</div>
+        <p class="why">この2式が以降すべての出発点。丸暗記より「連鎖律＋\(r_x=\cos\theta,\ \theta_x=-\sin\theta/r\)」を再現できる方が安全。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-2.</span> \(x f_x+y f_y\) を表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> \(x=r\cos\theta,\ y=r\sin\theta\) と問1-1 の \(f_x,f_y\) を代入する。
+        \[ xf_x=r\cos\theta\Big(\cos\theta\,f_r-\tfrac{\sin\theta}r f_\theta\Big),\qquad
+           yf_y=r\sin\theta\Big(\sin\theta\,f_r+\tfrac{\cos\theta}r f_\theta\Big). \]</p>
+        <p><span class="step">手順2</span> 足して \(f_r,f_\theta\) ごとに係数をまとめる。<br>
+        \(f_r\) の係数：\(r\cos^2\theta+r\sin^2\theta=r\)。<br>
+        \(f_\theta\) の係数：\(-\cos\theta\sin\theta+\sin\theta\cos\theta=0\)。</p>
+        <div class="ans">\(x f_x+y f_y=r f_r\)（＝原点方向の微分。図形的には「動径方向の変化率×\(r\)」）</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-3.</span> \(x f_y-y f_x\) を表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">方法A（定義から）</span> \(\theta\) で微分するとき \(r\) は固定なので、\(x=r\cos\theta,\ y=r\sin\theta\) より \(\dfrac{\partial x}{\partial\theta}=-r\sin\theta=-y,\ \dfrac{\partial y}{\partial\theta}=r\cos\theta=x\)。連鎖律で
+        \[ \frac{\partial f}{\partial\theta}=f_x\frac{\partial x}{\partial\theta}+f_y\frac{\partial y}{\partial\theta}=f_x(-y)+f_y(x)=x f_y-y f_x. \]
+        つまり演算子として \(x\partial_y-y\partial_x=\partial_\theta\)。</p>
+        <p><span class="step">方法B（代入）</span> 問1-1 を代入しても同じ：\(f_r\) の係数 \(r\cos\theta\sin\theta-r\sin\theta\cos\theta=0\)、\(f_\theta\) の係数 \(\cos^2\theta+\sin^2\theta=1\)。</p>
+        <div class="ans">\(x f_y-y f_x=f_\theta\)（＝角度方向の微分）</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-4.</span> ラプラシアン \(f_{xx}+f_{yy}\) を表せ。（導出も示す）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">方針</span> \(\partial_x=\cos\theta\,\partial_r-\dfrac{\sin\theta}r\partial_\theta\) を <b>2回</b>作用させる。積の微分に注意して丁寧に展開する。</p>
+        <p><span class="step">手順1</span> \(f_{xx}=\partial_x(f_x)=\Big(\cos\theta\,\partial_r-\tfrac{\sin\theta}r\partial_\theta\Big)\Big(\cos\theta\,f_r-\tfrac{\sin\theta}r f_\theta\Big)\)。<br>
+        まず \(\partial_r\Big(\cos\theta f_r-\tfrac{\sin\theta}r f_\theta\Big)=\cos\theta f_{rr}-\sin\theta\,\partial_r\!\big(\tfrac{f_\theta}{r}\big)=\cos\theta f_{rr}-\tfrac{\sin\theta}r f_{r\theta}+\tfrac{\sin\theta}{r^2}f_\theta.\)<br>
+        次に \(\partial_\theta\Big(\cos\theta f_r-\tfrac{\sin\theta}r f_\theta\Big)=-\sin\theta f_r+\cos\theta f_{r\theta}-\tfrac{\cos\theta}r f_\theta-\tfrac{\sin\theta}r f_{\theta\theta}.\)</p>
+        <p><span class="step">手順2</span> これらを組み合わせて（\(\cos\theta\times\)前者 \(-\tfrac{\sin\theta}r\times\)後者）
+        \[ f_{xx}=\cos^2\theta f_{rr}-\tfrac{2\sin\theta\cos\theta}{r}f_{r\theta}+\tfrac{\sin^2\theta}{r}f_r+\tfrac{2\sin\theta\cos\theta}{r^2}f_\theta+\tfrac{\sin^2\theta}{r^2}f_{\theta\theta}. \]</p>
+        <p><span class="step">手順3</span> 同様に \(\partial_y=\sin\theta\,\partial_r+\tfrac{\cos\theta}r\partial_\theta\) から
+        \[ f_{yy}=\sin^2\theta f_{rr}+\tfrac{2\sin\theta\cos\theta}{r}f_{r\theta}+\tfrac{\cos^2\theta}{r}f_r-\tfrac{2\sin\theta\cos\theta}{r^2}f_\theta+\tfrac{\cos^2\theta}{r^2}f_{\theta\theta}. \]</p>
+        <p><span class="step">手順4</span> 足すと \(f_{r\theta}\) と \(f_\theta\) の項が<b>ちょうど相殺</b>し、\(\cos^2\theta+\sin^2\theta=1\) で
+        \[ f_{xx}+f_{yy}=f_{rr}+\tfrac1r f_r+\tfrac1{r^2}f_{\theta\theta}. \]</p>
+        <div class="ans">\(\displaystyle f_{xx}+f_{yy}=f_{rr}+\frac1r f_r+\frac1{r^2}f_{\theta\theta}\)</div>
+        <p class="why">試験では結論だけ使えることも多いが、この相殺（交差項が消える）を一度自分の手で確かめておくと安心。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-5.</span> \(f_x^2+f_y^2\) を表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> 問1-1 を2乗する。
+        \[ f_x^2=\cos^2\theta f_r^2-\tfrac{2\sin\theta\cos\theta}{r}f_rf_\theta+\tfrac{\sin^2\theta}{r^2}f_\theta^2, \]
+        \[ f_y^2=\sin^2\theta f_r^2+\tfrac{2\sin\theta\cos\theta}{r}f_rf_\theta+\tfrac{\cos^2\theta}{r^2}f_\theta^2. \]</p>
+        <p><span class="step">手順2</span> 足すと交差項 \(\pm\tfrac{2\sin\theta\cos\theta}{r}f_rf_\theta\) が相殺、\(f_r^2\) の係数は \(\cos^2\theta+\sin^2\theta=1\)、\(\tfrac{f_\theta^2}{r^2}\) の係数も1。</p>
+        <div class="ans">\(\displaystyle f_x^2+f_y^2=f_r^2+\frac1{r^2}f_\theta^2\)（勾配 \(|\nabla f|^2\) の極座標表示）</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-6.</span>（発展）\(x f_x-y f_y\) を表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> 問1-2 と符号だけ違う。\(xf_x\) と \(yf_y\) を<b>引く</b>。
+        \[ xf_x-yf_y=r\cos\theta\Big(\cos\theta f_r-\tfrac{\sin\theta}r f_\theta\Big)-r\sin\theta\Big(\sin\theta f_r+\tfrac{\cos\theta}r f_\theta\Big). \]</p>
+        <p><span class="step">手順2</span> \(f_r\) の係数：\(r(\cos^2\theta-\sin^2\theta)=r\cos2\theta\)。\(f_\theta\) の係数：\(-\cos\theta\sin\theta-\sin\theta\cos\theta=-2\sin\theta\cos\theta=-\sin2\theta\)。</p>
+        <div class="ans">\(x f_x-y f_y=r\cos2\theta\,f_r-\sin2\theta\,f_\theta\)</div>
+        <p class="note">2022H 問2(1) と同型。倍角公式 \(\cos^2\theta-\sin^2\theta=\cos2\theta,\ 2\sin\theta\cos\theta=\sin2\theta\) が現れるのがポイント。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問1-7.</span>（演算子法の練習）演算子 \(D=x\partial_x+y\partial_y\) について、\(D\) と \(D^2\)（\(=D\) を2回作用）を \(r,\theta,\partial_r,\partial_\theta\) で表せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（\(D\) を作る）</span> 問1-2 と同じ計算を「演算子として」行う。\(\partial_r\) の係数は \(r(\cos^2\theta+\sin^2\theta)=r\)、\(\partial_\theta\) の係数は \(-\cos\theta\sin\theta+\sin\theta\cos\theta=0\)。よって
+        \[ D=x\partial_x+y\partial_y=r\,\partial_r. \]
+        （\(D\) は「原点方向の変化」を測るオイラー演算子。テーマ4の同次式でも顔を出す。）</p>
+        <p><span class="step">手順2（\(D^2\) は合成）</span> \(D^2=(r\partial_r)(r\partial_r)\)。ここが合成なので<b>後ろの \(\partial_r\) が前の係数 \(r\) に当たる</b>。関数 \(g\) に作用させて積の微分則で
+        \[ (r\partial_r)(r\partial_r)g=r\,\partial_r(r\,g_r)=r\big(\underbrace{(\partial_r r)}_{=1}g_r+r\,g_{rr}\big)=r\,g_r+r^2 g_{rr}. \]</p>
+        <p><span class="step">手順3</span> よって演算子として</p>
+        <div class="ans">\(D=x\partial_x+y\partial_y=r\,\partial_r,\qquad D^2=(x\partial_x+y\partial_y)^2=r^2\,\partial_r^2+r\,\partial_r.\)</div>
+        <p class="why">\(D^2\) を「\(r^2\partial_r^2\) だけ」と早合点しやすいが、係数 \(r\) を微分した \(r\partial_r\) の項が必ず出る。ここが演算子合成の勘所。<br>
+        <b>検算：</b>\(D^2=x^2 f_{xx}+2xy f_{xy}+y^2 f_{yy}+x f_x+y f_y\) を極座標に直しても \(r^2 f_{rr}+r f_r\) になる。</p>
+      </div></details></div>
+  </section>
+
+  <!-- ===== テーマ2 ===== -->
+  <section class="theme" id="t2">
+    <h2>テーマ2 ── 体積（球座標・円筒座標）</h2>
+    <p class="covers">対応する過去問：2022B 問2／2022D 問1／2023 問1／2023H 問2／2025L 問1／2025A 問1／2022H 問1</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>球座標：</b>\(x=\rho\sin\varphi\cos\theta,\ y=\rho\sin\varphi\sin\theta,\ z=\rho\cos\varphi\)（\(0\le\varphi\le\pi,\ 0\le\theta<2\pi\)）。このとき \(x^2+y^2+z^2=\rho^2\)、体積要素は \(dV=\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta\)。</p>
+      <p><b>体積の主公式の作り方：</b>曲面が各方向 \((\varphi,\theta)\) について \(\rho=\rho(\varphi,\theta)\) を1つ与えるとき、その方向の「芯」\(0\le\rho'\le\rho(\varphi,\theta)\) を積分する。\(\rho'\) 積分だけ先に実行すると
+      \[ \int_0^{\rho(\varphi,\theta)}\rho'^2\,d\rho'=\frac{\rho(\varphi,\theta)^3}{3}
+         \;\Longrightarrow\; V=\frac13\iint \rho(\varphi,\theta)^3\sin\varphi\,d\varphi\,d\theta. \]</p>
+      <p><b>手順：</b>① 球座標を代入し \(\rho^{2p}=(\text{角度の式})\) から \(\rho\) を解く。② \(\rho\ge0\) となる \((\varphi,\theta)\) の<b>符号領域</b>を決める（右辺が負だと \(\rho\) が存在しない）。③ 角度積分を計算。<br>
+      <b>\(z\) 軸対称なら円筒座標が楽：</b>\(x^2+y^2=r^2\)。断面が半径 \(r(z)\) の円なら \(V=\displaystyle\int\pi r(z)^2\,dz\)。</p>
+      <p class="note"><b>よく使う積分値：</b>
+      \(\int_0^{2\pi}\!\cos^2\theta\,d\theta=\int_0^{2\pi}\!\sin^2\theta\,d\theta=\pi\)、
+      \(\int_0^\pi\!\sin^2\varphi\,d\varphi=\tfrac\pi2\)、
+      \(\int_0^\pi\!\sin^3\varphi\,d\varphi=\tfrac43\)、
+      \(\int_0^\pi\!\cos^2\varphi\sin\varphi\,d\varphi=\tfrac23\)。<br>
+      一般に \(\displaystyle\int_0^{\pi/2}\!\sin^{m}\varphi\cos^{n}\varphi\,d\varphi=\tfrac12 B\!\Big(\tfrac{m+1}2,\tfrac{n+1}2\Big),\quad B(p,q)=\dfrac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}\)（\(\Gamma(n{+}1)=n!,\ \Gamma(\tfrac12)=\sqrt\pi\)）。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問2-1.</span> 球 \(x^2+y^2+z^2=R^2\) の体積を球座標で求めよ。（まず主公式に慣れる）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> \(x^2+y^2+z^2=\rho^2=R^2\) だから、どの方向でも \(\rho=R\)（一定）。符号領域はすべての \(\varphi\in[0,\pi],\ \theta\in[0,2\pi]\)。</p>
+        <p><span class="step">手順2</span> 主公式に入れる。
+        \[ V=\frac13\int_0^{2\pi}\!\!\int_0^\pi R^3\sin\varphi\,d\varphi\,d\theta
+             =\frac{R^3}3\underbrace{\int_0^{2\pi}\!d\theta}_{2\pi}\underbrace{\int_0^\pi\!\sin\varphi\,d\varphi}_{[-\cos\varphi]_0^\pi=2}
+             =\frac{R^3}3\cdot2\pi\cdot2. \]</p>
+        <div class="ans">\(V=\dfrac{4\pi R^3}{3}\)（見慣れた球の体積。主公式が正しく使えている確認になる）</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-2.</span> \((x^2+y^2+z^2)^2=a^3z\)（\(a>0\)）で囲まれる体積を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（\(\rho\) を解く）</span> \(z=\rho\cos\varphi\)、\((x^2+y^2+z^2)^2=(\rho^2)^2=\rho^4\)。方程式は \(\rho^4=a^3\rho\cos\varphi\)。両辺を \(\rho\) で割って \(\rho^3=a^3\cos\varphi\)、すなわち \(\rho=a(\cos\varphi)^{1/3}\)。</p>
+        <p><span class="step">手順2（符号領域）</span> \(\rho\ge0\) には \(\cos\varphi\ge0\)、つまり \(\varphi\in[0,\tfrac\pi2]\) が必要（上半分）。\(\theta\) は全周。</p>
+        <p><span class="step">手順3（積分）</span> 主公式に \(\rho^3=a^3\cos\varphi\) を入れる（3乗が既に出ているので好都合）。
+        \[ V=\frac13\int_0^{2\pi}\!\!\int_0^{\pi/2}a^3\cos\varphi\cdot\sin\varphi\,d\varphi\,d\theta
+             =\frac{a^3}3\cdot2\pi\cdot\int_0^{\pi/2}\!\cos\varphi\sin\varphi\,d\varphi. \]
+        ここで \(\int_0^{\pi/2}\cos\varphi\sin\varphi\,d\varphi=\big[\tfrac12\sin^2\varphi\big]_0^{\pi/2}=\tfrac12\)。よって \(V=\dfrac{a^3}3\cdot2\pi\cdot\tfrac12\)。</p>
+        <div class="ans">\(V=\dfrac{\pi a^3}{3}\)</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-3.</span> \((x^2+y^2+z^2)^2=a^3\sqrt{x^2+y^2}\)（\(a>0\)）で囲まれる体積を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> \(\sqrt{x^2+y^2}=\rho\sin\varphi\)（\(\varphi\in[0,\pi]\) で \(\sin\varphi\ge0\)）。\(\rho^4=a^3\rho\sin\varphi\Rightarrow\rho^3=a^3\sin\varphi\)。</p>
+        <p><span class="step">手順2</span> \(\sin\varphi\ge0\) は常に成り立つので符号領域は全 \((\varphi,\theta)\)。</p>
+        <p><span class="step">手順3</span> \[ V=\frac13\int_0^{2\pi}\!\!\int_0^\pi a^3\sin\varphi\cdot\sin\varphi\,d\varphi\,d\theta
+             =\frac{a^3}3\cdot2\pi\cdot\int_0^\pi\!\sin^2\varphi\,d\varphi=\frac{a^3}3\cdot2\pi\cdot\frac\pi2. \]
+        （\(\int_0^\pi\sin^2\varphi\,d\varphi=\tfrac\pi2\) は半角 \(\sin^2\varphi=\tfrac{1-\cos2\varphi}2\) から。）</p>
+        <div class="ans">\(V=\dfrac{\pi^2 a^3}{3}\)</div>
+        <p class="why">問2-2 は \(z\)（\(\cos\varphi\)）、本問は \(\sqrt{x^2+y^2}\)（\(\sin\varphi\)）。右辺が \(\cos\) か \(\sin\) かで符号領域と \(\varphi\) 積分が変わる、という比較練習。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-4.</span> \((x^2+y^2+z^2)^2=xyz\) で囲まれる体積を求めよ。（積＋符号領域：最重要手法）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（\(\rho\) を解く）</span> \(xyz=(\rho\sin\varphi\cos\theta)(\rho\sin\varphi\sin\theta)(\rho\cos\varphi)=\rho^3\sin^2\varphi\cos\varphi\,\sin\theta\cos\theta\)。方程式 \(\rho^4=\rho^3(\cdots)\) より
+        \[ \rho=\sin^2\varphi\cos\varphi\,\sin\theta\cos\theta. \]</p>
+        <p><span class="step">手順2（符号領域 \(D\)）</span> \(\rho\ge0\) には \(\cos\varphi\,\sin\theta\cos\theta\ge0\)（\(\sin^2\varphi\ge0\) は自動）。すなわち
+        \(D=\{\cos\varphi\ge0\ \text{かつ}\ \sin\theta\cos\theta\ge0\}\ \cup\ \{\cos\varphi\le0\ \text{かつ}\ \sin\theta\cos\theta\le0\}\)。</p>
+        <p><span class="step">手順3（積分の準備）</span> \(\rho^3=\sin^6\varphi\cos^3\varphi\,\sin^3\theta\cos^3\theta\) を主公式へ。
+        \[ V=\frac13\iint_D \sin^7\varphi\cos^3\varphi\,\sin^3\theta\cos^3\theta\,d\varphi\,d\theta. \]</p>
+        <p><span class="step">手順4（各因子を計算）</span><br>
+        ・\(\displaystyle\int_0^{\pi/2}\!\sin^7\varphi\cos^3\varphi\,d\varphi=\tfrac12 B(4,2)=\tfrac12\cdot\dfrac{\Gamma(4)\Gamma(2)}{\Gamma(6)}=\tfrac12\cdot\dfrac{6\cdot1}{120}=\dfrac1{40}\)。<br>
+        ・\(\varphi\in[\tfrac\pi2,\pi]\) では \(\varphi=\pi-u\) と置換して \(\displaystyle\int_{\pi/2}^{\pi}\!\sin^7\varphi\cos^3\varphi\,d\varphi=-\dfrac1{40}\)（\(\cos^3\) が符号反転）。<br>
+        ・\(\sin^3\theta\cos^3\theta=\tfrac18\sin^32\theta\)。\(\sin2\theta\ge0\)（\(\theta\in[0,\tfrac\pi2]\cup[\pi,\tfrac{3\pi}2]\)）で
+        \(\displaystyle\int_{\sin2\theta\ge0}\!\!\sin^3\theta\cos^3\theta\,d\theta=\tfrac18\cdot2\!\int_0^{\pi/2}\!\sin^32\theta\,d\theta=\tfrac18\cdot2\cdot\tfrac12\!\int_0^\pi\!\sin^3 v\,dv=\tfrac18\cdot\tfrac43=\dfrac16\)。<br>
+        ・\(\sin2\theta\le0\) の側は符号が逆で \(-\dfrac16\)。</p>
+        <p><span class="step">手順5（\(D\) 上で合算）</span> \(D\) は「\(\varphi\)上半×\(\theta\)正」と「\(\varphi\)下半×\(\theta\)負」の2枚。両方とも \((-)\times(-)=(+)\) か \((+)\times(+)\) で正の寄与：
+        \[ \iint_D=\underbrace{\tfrac1{40}\cdot\tfrac16}_{\text{上半×正}}+\underbrace{\Big(-\tfrac1{40}\Big)\Big(-\tfrac16\Big)}_{\text{下半×負}}=\tfrac1{240}+\tfrac1{240}=\tfrac1{120}. \]</p>
+        <div class="ans">\(V=\dfrac13\cdot\dfrac1{120}=\dfrac1{360}\)　（一般に \((x^2+y^2+z^2)^2=c\,xyz\) なら \(V=\dfrac{c^3}{360}\)）</div>
+        <p class="note">2022D 問1・2023 問1・2023H 問2 の核。2023H の \((a^2x^2+b^2y^2+c^2z^2)^2=d^3xyz\) は \(X=ax,Y=by,Z=cz\) と置換して本問の形（\(c=d^3/(abc)\)）に帰着し、最後にヤコビアン \(\tfrac1{abc}\) を掛ける。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-5.</span> \((x^2+y^2+z^2)^5=(x^2+2y^2+2z^2)^2\) で囲まれる体積を求めよ。（右辺が2次形式）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（\(\rho\) を解く）</span> 左辺 \(=\rho^{10}\)。右辺は \((\ )\ge0\) の2乗なので、両辺の平方根をとって \(\rho^5=x^2+2y^2+2z^2\)。球座標で \(x^2=\rho^2\sin^2\varphi\cos^2\theta\) 等を代入すると右辺 \(=\rho^2(\sin^2\varphi\cos^2\theta+2\sin^2\varphi\sin^2\theta+2\cos^2\varphi)\)。よって
+        \[ \rho^3=\sin^2\varphi\cos^2\theta+2\sin^2\varphi\sin^2\theta+2\cos^2\varphi\quad(\ge0,\ \text{全方向}). \]</p>
+        <p><span class="step">手順2（項ごとに積分）</span> \(V=\tfrac13\displaystyle\int_0^{2\pi}\!\!\int_0^\pi\rho^3\sin\varphi\,d\varphi\,d\theta\) を3項に分ける。<br>
+        ・第1項 \(\displaystyle\int_0^{2\pi}\!\cos^2\theta\,d\theta\int_0^\pi\!\sin^3\varphi\,d\varphi=\pi\cdot\tfrac43=\tfrac{4\pi}3\)。<br>
+        ・第2項 \(2\displaystyle\int_0^{2\pi}\!\sin^2\theta\,d\theta\int_0^\pi\!\sin^3\varphi\,d\varphi=2\cdot\pi\cdot\tfrac43=\tfrac{8\pi}3\)。<br>
+        ・第3項 \(2\displaystyle\int_0^{2\pi}\!d\theta\int_0^\pi\!\cos^2\varphi\sin\varphi\,d\varphi=2\cdot2\pi\cdot\tfrac23=\tfrac{8\pi}3\)。<br>
+        （\(\int_0^\pi\cos^2\varphi\sin\varphi\,d\varphi=\big[-\tfrac13\cos^3\varphi\big]_0^\pi=\tfrac13+\tfrac13=\tfrac23\)。）</p>
+        <p><span class="step">手順3</span> 和は \(\tfrac{4\pi}3+\tfrac{8\pi}3+\tfrac{8\pi}3=\tfrac{20\pi}3\)。これを \(\tfrac13\) 倍。</p>
+        <div class="ans">\(V=\dfrac13\cdot\dfrac{20\pi}3=\dfrac{20\pi}{9}\)　（一般に \((x^2+y^2+z^2)^5=(\alpha x^2+\beta y^2+\gamma z^2)^2\Rightarrow V=\tfrac{4\pi}9(\alpha+\beta+\gamma)\)）</div>
+        <p class="note">2025L 問1 と同型。各座標の2乗の係数がそのまま \(\tfrac{4\pi}9\times\) で効く、と覚えておくと速い。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-6.</span> \((x^2+y^2+z^2)^3=\dfrac{4z^2}{x^2+y^2}\) で囲まれる体積を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1</span> \(\dfrac{z^2}{x^2+y^2}=\dfrac{\rho^2\cos^2\varphi}{\rho^2\sin^2\varphi}=\cot^2\varphi\)（\(\rho\) が約分で消えるのがポイント）。左辺 \(=\rho^6\) なので \(\rho^6=4\cot^2\varphi\)、よって \(\rho^3=2|\cot\varphi|=\dfrac{2|\cos\varphi|}{\sin\varphi}\)。</p>
+        <p><span class="step">手順2</span> \(\cot^2\varphi\ge0\) は常に成り立つので全 \((\varphi,\theta)\)。主公式へ：
+        \[ V=\frac13\int_0^{2\pi}\!\!\int_0^\pi \frac{2|\cos\varphi|}{\sin\varphi}\cdot\sin\varphi\,d\varphi\,d\theta
+             =\frac13\cdot2\pi\cdot\int_0^\pi 2|\cos\varphi|\,d\varphi. \]
+        \(\sin\varphi\) が約分され、\(\displaystyle\int_0^\pi|\cos\varphi|\,d\varphi=\int_0^{\pi/2}\cos\varphi\,d\varphi+\int_{\pi/2}^\pi(-\cos\varphi)\,d\varphi=1+1=2\)。よって \(\int_0^\pi 2|\cos\varphi|\,d\varphi=4\)。</p>
+        <div class="ans">\(V=\dfrac13\cdot2\pi\cdot4=\dfrac{8\pi}{3}\)</div>
+        <p class="note">2025A 問1 と同型。\(\varphi\to0,\pi\) で \(\rho\to\infty\)（領域は \(z\) 軸方向に無限）だが、\(\rho^3\sin\varphi=2|\cos\varphi|\) が有界なので<b>体積は収束</b>する、という面白い例。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-7.</span> \(x^2+y^2\le z(a-z)\)（\(0\le z\le a,\ a>0\)）で表される領域の体積を求めよ。（円筒座標の基礎）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（断面を見る）</span> 各高さ \(z\) で切ると、断面は \(x^2+y^2\le z(a-z)\)、すなわち半径 \(r(z)=\sqrt{z(a-z)}\) の円。面積は \(\pi r(z)^2=\pi z(a-z)\)。</p>
+        <p><span class="step">手順2（薄い円板を積む）</span> 体積は断面積を \(z\) で積分：
+        \[ V=\int_0^a \pi z(a-z)\,dz=\pi\int_0^a(az-z^2)\,dz=\pi\Big[\frac{az^2}2-\frac{z^3}3\Big]_0^a=\pi\Big(\frac{a^3}2-\frac{a^3}3\Big). \]</p>
+        <div class="ans">\(V=\pi\cdot\dfrac{a^3}6=\dfrac{\pi a^3}{6}\)</div>
+        <p class="why">「\(V=\int(\text{断面積})\,dz\)」が円筒座標の心。半径が \(z\) の関数で書ければ、あとは1変数積分。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問2-8.</span> \((x^2+y^2)^2+z^4=az^3\)（\(a>0\)）で囲まれる体積を求めよ。（円筒座標＋ベータ関数）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（半径を \(z\) で表す）</span> \(x^2+y^2=r^2\) だから \(r^4+z^4=az^3\)、よって \(r^4=z^3(a-z)\)。これが \(\ge0\) になるのは \(0\le z\le a\)。半径は \(r^2=\sqrt{z^3(a-z)}=z^{3/2}(a-z)^{1/2}\)。</p>
+        <p><span class="step">手順2（断面積を積む）</span> \(V=\displaystyle\int_0^a\pi r^2\,dz=\pi\int_0^a z^{3/2}(a-z)^{1/2}\,dz\)。</p>
+        <p><span class="step">手順3（\(z=at\) でベータ関数に）</span> \(z=at\)（\(dz=a\,dt\)）とおくと \(z^{3/2}=a^{3/2}t^{3/2},\ (a-z)^{1/2}=a^{1/2}(1-t)^{1/2}\) なので
+        \[ \int_0^a z^{3/2}(a-z)^{1/2}\,dz=a^{3/2}\cdot a^{1/2}\cdot a\int_0^1 t^{3/2}(1-t)^{1/2}\,dt=a^3 B\!\Big(\tfrac52,\tfrac32\Big). \]</p>
+        <p><span class="step">手順4（ベータを数値に）</span> \(B(\tfrac52,\tfrac32)=\dfrac{\Gamma(5/2)\Gamma(3/2)}{\Gamma(4)}\)。ここで \(\Gamma(\tfrac52)=\tfrac32\cdot\tfrac12\sqrt\pi=\tfrac{3\sqrt\pi}4,\ \Gamma(\tfrac32)=\tfrac12\sqrt\pi,\ \Gamma(4)=3!=6\)。よって
+        \(B(\tfrac52,\tfrac32)=\dfrac{(3\sqrt\pi/4)(\sqrt\pi/2)}{6}=\dfrac{3\pi/8}{6}=\dfrac{\pi}{16}\)。</p>
+        <div class="ans">\(V=\pi\cdot a^3\cdot\dfrac{\pi}{16}=\dfrac{\pi^2 a^3}{16}\)</div>
+        <p class="note">2022H 問1 と同型（\((x^2+y^2)^2+z^4=a^3z\) なら \(r^4=z(a^3-z^3)\) で \(V=\tfrac{\pi^2a^3}6\)）。「\(r^2\) を \(z\) の関数にして \(z=at\) 置換 → ベータ関数 → \(\Gamma\) の値」という流れを身につけよう。</p>
+      </div></details></div>
+  </section>
+
+  <!-- ===== テーマ3 ===== -->
+  <section class="theme" id="t3">
+    <h2>テーマ3 ── 2変数関数の極値</h2>
+    <p class="covers">対応する過去問：2022D 問2／2023 問2／2025L 問2／2025A 問2／2022H 問3</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>手順は2段階：</b>① <b>臨界点</b>を求める（\(f_x=0,\ f_y=0\) を連立）。ふつう片方の式から一方の変数を消して、1変数の方程式（多くは3次）に落とし、因数分解する。② 各臨界点で <b>ヘッセ判別式</b> \(D=f_{xx}f_{yy}-f_{xy}^2\) を計算して分類する。</p>
+      <p><b>判定（2階微分テスト）：</b></p>
+      <ul class="cl">
+        <li>\(D>0\) かつ \(f_{xx}>0\) → <b>極小</b>（お椀が上向き）</li>
+        <li>\(D>0\) かつ \(f_{xx}<0\) → <b>極大</b>（お椀が下向き）</li>
+        <li>\(D<0\) → <b>鞍点</b>（峠。方向によって増減が違う＝極値ではない）</li>
+        <li>\(D=0\) → この方法では<b>判定不能</b>（別途調べる）</li>
+      </ul>
+      <p class="note"><b>大事な注意：</b>臨界点は「極値の候補」にすぎない。<b>臨界点があっても \(D<0\) なら極値ではない</b>。全部鞍点なら「極値なし」（2025A 問2 型）。パラメータ付きなら \(a\) の符号で極大・極小が入れ替わることがある。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問3-1.</span> \(f=x^2+xy+y^2-3x\) の極値を求め、極大・極小を判定せよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（臨界点）</span> \(f_x=2x+y-3=0,\quad f_y=x+2y=0\)。第2式より \(x=-2y\)。第1式へ代入して \(2(-2y)+y-3=-3y-3=0\Rightarrow y=-1,\ x=2\)。臨界点は \((2,-1)\) の1つ。</p>
+        <p><span class="step">手順2（判定）</span> \(f_{xx}=2,\ f_{yy}=2,\ f_{xy}=1\)。\(D=2\cdot2-1^2=3>0\)、かつ \(f_{xx}=2>0\)。よって極小。</p>
+        <p><span class="step">手順3（値）</span> \(f(2,-1)=4+(2)(-1)+1-6=4-2+1-6=-3\)。</p>
+        <div class="ans">点 \((2,-1)\) で極小。極小値 \(-3\)。</div>
+        <p class="why">2次関数（かつ \(D>0,f_{xx}>0\)）なので、これは全体の最小値でもある。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問3-2.</span> \(f=x^3+y^3-6xy\) の極値を求め、極大・極小を判定せよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（臨界点）</span> \(f_x=3x^2-6y=0\Rightarrow y=\tfrac{x^2}2\)、\(f_y=3y^2-6x=0\Rightarrow x=\tfrac{y^2}2\)。前者を後者へ代入：\(x=\tfrac12\big(\tfrac{x^2}2\big)^2=\tfrac{x^4}8\Rightarrow x^4-8x=0\Rightarrow x(x^3-8)=0\)。よって \(x=0\) または \(x=2\)。<br>
+        \(x=0\Rightarrow y=0\)、\(x=2\Rightarrow y=\tfrac{4}2=2\)。臨界点 \((0,0),(2,2)\)。</p>
+        <p><span class="step">手順2（判定）</span> \(f_{xx}=6x,\ f_{yy}=6y,\ f_{xy}=-6\)。\(D=36xy-36\)。<br>
+        ・\((0,0)\)：\(D=-36<0\) → 鞍点。<br>
+        ・\((2,2)\)：\(D=36\cdot4-36=108>0,\ f_{xx}=12>0\) → 極小。</p>
+        <p><span class="step">手順3（値）</span> \(f(2,2)=8+8-6\cdot4=16-24=-8\)。</p>
+        <div class="ans">点 \((2,2)\) で極小、極小値 \(-8\)。\((0,0)\) は鞍点（極値でない）。</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問3-3.</span> \(f=x^2+y^4-4xy\) の極値を求め、極大・極小を判定せよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（臨界点）</span> \(f_x=2x-4y=0\Rightarrow x=2y\)。\(f_y=4y^3-4x=0\)。代入して \(4y^3-4(2y)=4y^3-8y=4y(y^2-2)=0\Rightarrow y=0,\ \pm\sqrt2\)。<br>
+        \(x=2y\) より臨界点 \((0,0),\ (2\sqrt2,\sqrt2),\ (-2\sqrt2,-\sqrt2)\)。</p>
+        <p><span class="step">手順2（判定）</span> \(f_{xx}=2,\ f_{yy}=12y^2,\ f_{xy}=-4\)。\(D=2\cdot12y^2-16=24y^2-16\)。<br>
+        ・\((0,0)\)：\(D=-16<0\) → 鞍点。<br>
+        ・\(y=\pm\sqrt2\)：\(D=24\cdot2-16=32>0,\ f_{xx}=2>0\) → 極小。</p>
+        <p><span class="step">手順3（値）</span> \(f(2\sqrt2,\sqrt2)=(2\sqrt2)^2+(\sqrt2)^4-4(2\sqrt2)(\sqrt2)=8+4-16=-4\)（もう一方も対称で \(-4\)）。</p>
+        <div class="ans">点 \((2\sqrt2,\sqrt2),(-2\sqrt2,-\sqrt2)\) で極小、極小値 \(-4\)。\((0,0)\) は鞍点。</div>
+        <p class="note">臨界方程式が3次 \(4y(y^2-2)=0\) になる型（2022D 問2 と同系統）。因数分解して実数解を丁寧に拾う。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問3-4.</span> \(f=(x+y)e^{-(x^2+y^2)}\) の極値を求め、極大・極小を判定せよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（1階微分）</span> 積の微分。\(g=e^{-(x^2+y^2)}\) とおくと \(g_x=-2x\,g\)。
+        \[ f_x=g+(x+y)(-2x)g=g\big(1-2x(x+y)\big),\qquad f_y=g\big(1-2y(x+y)\big). \]</p>
+        <p><span class="step">手順2（臨界点）</span> \(g>0\) なので括弧 \(=0\)：\(1-2x(x+y)=0,\ 1-2y(x+y)=0\)。差をとると \(-2(x+y)(x-y)=0\)。<br>
+        \(x+y=0\) なら \(1-0=1\ne0\) で不適。よって \(x=y\)。すると \(1-2x(2x)=1-4x^2=0\Rightarrow x=\pm\tfrac12\)。臨界点 \((\tfrac12,\tfrac12),(-\tfrac12,-\tfrac12)\)。</p>
+        <p><span class="step">手順3（2階微分を臨界点で）</span> 臨界点では \(1-2x(x+y)=0\) が使えて計算が簡単になる。
+        \[ f_{xx}=g\big(-4x-2y\big),\quad f_{yy}=g\big(-2x-4y\big),\quad f_{xy}=g\big(-2x\big)\quad(\text{臨界点上}). \]
+        ・\((\tfrac12,\tfrac12)\)（\(g=e^{-1/2}\)）：\(f_{xx}=e^{-1/2}(-3),\ f_{yy}=e^{-1/2}(-3),\ f_{xy}=e^{-1/2}(-1)\)。
+        \(D=e^{-1}(9-1)=8e^{-1}>0,\ f_{xx}<0\) → <b>極大</b>。<br>
+        ・\((-\tfrac12,-\tfrac12)\)：符号が反転し \(f_{xx}=3e^{-1/2}>0,\ D=8e^{-1}>0\) → <b>極小</b>。</p>
+        <p><span class="step">手順4（値）</span> \(x+y=\pm1,\ x^2+y^2=\tfrac12\) より \(f(\pm\tfrac12,\pm\tfrac12)=\pm1\cdot e^{-1/2}\)。</p>
+        <div class="ans">\((\tfrac12,\tfrac12)\) で極大、極大値 \(e^{-1/2}=\dfrac1{\sqrt e}\)。\((-\tfrac12,-\tfrac12)\) で極小、極小値 \(-\dfrac1{\sqrt e}\)。</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問3-5.</span> \(f=x^3-3x+y^3-3y\) の極値を求め、極大・極小を判定せよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（変数分離に注目）</span> \(x\) の部分と \(y\) の部分が独立。\(f_x=3x^2-3=0\Rightarrow x=\pm1\)、\(f_y=3y^2-3=0\Rightarrow y=\pm1\)。臨界点は \((\pm1,\pm1)\) の4つ。</p>
+        <p><span class="step">手順2（判定）</span> \(f_{xx}=6x,\ f_{yy}=6y,\ f_{xy}=0\)。\(D=36xy\)。</p>
+        <ul class="cl">
+          <li>\((1,1)\)：\(D=36>0,\ f_{xx}=6>0\) → 極小、\(f=(1-3)+(1-3)=-4\)。</li>
+          <li>\((-1,-1)\)：\(D=36>0,\ f_{xx}=-6<0\) → 極大、\(f=(-1+3)+(-1+3)=4\)。</li>
+          <li>\((1,-1),(-1,1)\)：\(D=-36<0\) → 鞍点。</li>
+        </ul>
+        <div class="ans">極小 \((1,1)\) で \(-4\)、極大 \((-1,-1)\) で \(4\)。他2点は鞍点。</div>
+        <p class="why">1つの問題で「極大・極小・鞍点」が全部出る好例。\(f_{xy}=0\) なので \(D\) の符号は \(f_{xx}f_{yy}\) の符号そのもの。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問3-6.</span> \(f=(x-y)e^{xy}\) の極値を求め、極大・極小を判定せよ。（2025A 型：極値なし）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（1階微分）</span> \(h=e^{xy}\) とおくと \(h_x=y\,h,\ h_y=x\,h\)。
+        \[ f_x=h+(x-y)yh=h(1+xy-y^2),\qquad f_y=-h+(x-y)xh=h(x^2-xy-1). \]</p>
+        <p><span class="step">手順2（臨界点）</span> \(h>0\) なので \(1+xy-y^2=0,\ x^2-xy-1=0\)。<b>辺々を足す</b>と \(x^2-y^2=0\Rightarrow x=\pm y\)。<br>
+        \(x=y\)：第1式が \(1+y^2-y^2=1\ne0\) で不適。<br>
+        \(x=-y\)：\(1+(-y)y-y^2=1-2y^2=0\Rightarrow y=\pm\tfrac1{\sqrt2}\)。臨界点 \(\big(\tfrac1{\sqrt2},-\tfrac1{\sqrt2}\big),\big(-\tfrac1{\sqrt2},\tfrac1{\sqrt2}\big)\)。</p>
+        <p><span class="step">手順3（2階微分を臨界点で）</span> 臨界点では \(1+xy-y^2=0,\ x^2-xy-1=0\) を使うと簡単になり
+        \[ f_{xx}=h\,y,\qquad f_{yy}=-h\,x,\qquad f_{xy}=h(x-2y)\quad(\text{臨界点上}). \]
+        点 \(\big(\tfrac1{\sqrt2},-\tfrac1{\sqrt2}\big)\)（\(xy=-\tfrac12,\ h=e^{-1/2}\)）で
+        \(f_{xx}=e^{-1/2}\!\big(-\tfrac1{\sqrt2}\big),\ f_{yy}=e^{-1/2}\!\big(-\tfrac1{\sqrt2}\big),\ f_{xy}=e^{-1/2}\!\big(\tfrac1{\sqrt2}+\tfrac2{\sqrt2}\big)=e^{-1/2}\tfrac3{\sqrt2}\)。
+        \[ D=f_{xx}f_{yy}-f_{xy}^2=e^{-1}\Big(\tfrac12-\tfrac92\Big)=-\frac4e<0. \]
+        もう一方の点も対称に \(D=-\tfrac4e<0\)。</p>
+        <div class="ans">臨界点は2つあるが<b>いずれも鞍点</b>（\(D<0\)）。よって<b>極値をとる点は存在しない</b>（極値なし）。</div>
+        <p class="note">「臨界点＝極値」ではないことの典型。必ず \(D\) を確認する、という教訓（2025A 問2 で受験生が戸惑った点）。</p>
+      </div></details></div>
+  </section>
+
+  <!-- ===== テーマ4 ===== -->
+  <section class="theme" id="t4">
+    <h2>テーマ4 ── 極限（2次形式・多項式の商）</h2>
+    <p class="covers">対応する過去問：2022B 問3／2023H 問3／2023 問3</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>2変数の極限のコツ：</b>1変数と違い、原点へは<b>無数の方向</b>から近づける。「極限が存在する」＝どの近づき方でも同じ値。だから<b>2つの経路で値が違えば、その時点で極限は存在しない</b>（反例が1つあれば十分）。まず \(y=0,\ x=0,\ y=mx\) などを試すのが定石。</p>
+      <p><b>同次式の商が便利な理由：</b>2次形式 \(Q\) は \(Q(t\mathbf v)=t^2Q(\mathbf v)\)。よって半直線 \(\mathbf x=t\mathbf v\)（\(t\to0\)）に沿うと
+      \[ \frac{Q_2(t\mathbf v)}{Q_1(t\mathbf v)}=\frac{t^2Q_2(\mathbf v)}{t^2Q_1(\mathbf v)}=\frac{Q_2(\mathbf v)}{Q_1(\mathbf v)} \]
+      で \(t\) によらない＝「方向 \(\mathbf v\) だけで決まる値」。\(Q_1>0\)（正定）なら分母は消えず連続。ゆえに<b>極限が存在 ⇔ この比が方向によらず一定 ⇔ \(Q_2=cQ_1\)</b>、極限値は \(c\)。</p>
+      <p><b>多項式 \(P\div(x^2+y^2)\)：</b>分母は2次。低次から見ると、定数項は \(\to\infty\)、1次項は \(\to\infty\)、2次項は「等方（\(x^2,y^2\)の係数一致・\(xy\)なし）」のときだけ収束、3次以上は自動的に \(\to0\)。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問4-1.</span> \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}\) は存在するか。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順（2経路で反例）</span> \(x\) 軸に沿う（\(y=0\)）と \(\dfrac{x^2}{x^2}=1\)。\(y\) 軸に沿う（\(x=0\)）と \(\dfrac{-y^2}{y^2}=-1\)。</p>
+        <div class="ans">経路で値（\(1\) と \(-1\)）が異なるので、極限は<b>存在しない</b>。</div>
+        <p class="why">\(y=mx\) で一般化すると \(\dfrac{1-m^2}{1+m^2}\)。\(m\) ごとに違う値になるのが「方向依存」の意味。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問4-2.</span> 次の極限を調べよ。(a) \(\dfrac{3x^2+3y^2}{x^2+y^2}\)　(b) \(\dfrac{x^2+4y^2}{x^2+y^2}\)（\((x,y)\to0\)）。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p>(a) 分子 \(=3(x^2+y^2)=3\times\)分母。よって値は恒等的に \(3\)（方向によらず一定）。これは \(Q_2=3Q_1\) の場合。</p>
+        <p>(b) \(y=0\to\dfrac{x^2}{x^2}=1\)、\(x=0\to\dfrac{4y^2}{y^2}=4\)。\(x^2,y^2\) の係数が違う（\(Q_2\ne cQ_1\)）ので方向依存。</p>
+        <div class="ans">(a) 極限 \(3\)（存在）　(b) 存在しない</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問4-3.</span> \(Q_1,Q_2\) を2変数2次形式、\(Q_1\) を正定とする。\(\displaystyle\lim_{(x,y)\to O}\frac{Q_2}{Q_1}\) が存在する条件を述べ、理由を示せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（半直線に沿う）</span> 単位ベクトル \(\mathbf v\) 方向に \(\mathbf x=t\mathbf v\)（\(t\to0^+\)）とすると、2次同次性より \(\dfrac{Q_2(t\mathbf v)}{Q_1(t\mathbf v)}=\dfrac{Q_2(\mathbf v)}{Q_1(\mathbf v)}\)（\(t\) に無関係）。</p>
+        <p><span class="step">手順2（存在条件）</span> \(Q_1>0\) だからこの比は単位円 \(\{\mathbf v\}\) 上で連続な関数。全方向で同じ値に収束する必要があるので、比が方向によらず一定 \(=c\) であること、すなわち \(Q_2(\mathbf v)=cQ_1(\mathbf v)\)（全 \(\mathbf v\)）。</p>
+        <div class="ans">条件：\(Q_2=c\,Q_1\)（ある定数 \(c\) が存在）。このとき極限値は \(c\)。行列で言えば \(A_2=cA_1\)。</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問4-4.</span> \((x,y)\to0\) で次の \(\dfrac{P}{x^2+y^2}\) を調べよ。(a) \(P=x^2+y^2+x^3+y^3\)　(b) \(P=x^2+2y^2\)　(c) \(P=2xy\)。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p>(a) \(\dfrac{x^2+y^2}{x^2+y^2}+\dfrac{x^3+y^3}{x^2+y^2}=1+\dfrac{x^3+y^3}{x^2+y^2}\)。第2項は \(\Big|\dfrac{x^3}{x^2+y^2}\Big|\le\dfrac{|x|\,x^2}{x^2+y^2}\le|x|\to0\)（\(y^3\) も同様）。よって極限 \(1\)。</p>
+        <p>(b) \(y=0\to1,\ x=0\to2\)。2次項の係数が不一致（等方でない）→ 存在しない。</p>
+        <p>(c) \(\dfrac{2xy}{x^2+y^2}\)：\(y=x\to\dfrac{2x^2}{2x^2}=1\)、\(y=0\to0\)。\(xy\) 項があると方向依存 → 存在しない。</p>
+        <div class="ans">(a) \(1\)　(b) 存在しない　(c) 存在しない</div>
+        <p class="why">「等方な2次の芯＋高次のゴミ」だけが収束する。(a) は芯 \(x^2+y^2\) が等方なので収束、高次項は消える。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問4-5.</span> \(P(x,y)=\displaystyle\sum_{i,j\ge0}a_{ij}x^iy^j\) のとき \(\displaystyle\lim_{(x,y)\to0}\frac{P}{x^2+y^2}\) が収束する条件と極限値を述べよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">次数ごとに分解</span> \(P=a_{00}+(a_{10}x+a_{01}y)+(a_{20}x^2+a_{11}xy+a_{02}y^2)+(\text{3次以上})\)。分母は2次。</p>
+        <ul class="cl">
+          <li><b>定数項：</b>\(a_{00}\ne0\) だと \(\dfrac{a_{00}}{x^2+y^2}\to\infty\)。→ \(a_{00}=0\)。</li>
+          <li><b>1次項：</b>\(\dfrac{a_{10}x}{x^2+y^2}\) は \(y=0\) で \(\dfrac{a_{10}}x\to\infty\)。→ \(a_{10}=a_{01}=0\)。</li>
+          <li><b>2次項：</b>\(\dfrac{a_{20}x^2+a_{11}xy+a_{02}y^2}{x^2+y^2}\) は0次同次。方向 \((\cos\alpha,\sin\alpha)\) で値 \(a_{20}\cos^2\alpha+a_{11}\sin\alpha\cos\alpha+a_{02}\sin^2\alpha\)。方向によらず一定 ⇔ \(a_{11}=0,\ a_{20}=a_{02}\)。</li>
+          <li><b>3次以上：</b>\(x^2+y^2\) で割ると \(\to0\)。影響なし。</li>
+        </ul>
+        <div class="ans">収束条件：\(a_{00}=a_{10}=a_{01}=a_{11}=0\) かつ \(a_{20}=a_{02}\)。極限値は \(a_{20}(=a_{02})\)。</div>
+      </div></details></div>
+  </section>
+
+  <!-- ===== テーマ5 ===== -->
+  <section class="theme" id="t5">
+    <h2>テーマ5 ── 広義積分の収束</h2>
+    <p class="covers">対応する過去問：2022D 問3</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>広義積分＝極限：</b>特異点（無限大になる点）や \(\infty\) を、いったん \(\epsilon\) や \(R\) で避けて積分し、最後に極限をとる。収束するかどうかは、その<b>怪しい点の近くでの発散の速さ</b>で決まる。</p>
+      <p><b>2つの基本形（丸暗記推奨）：</b>
+      \(\displaystyle\int_0^1\frac{dx}{x^p}\) は \(p<1\) で収束、\(\displaystyle\int_1^\infty\frac{dx}{x^p}\) は \(p>1\) で収束。境目 \(p=1\) はどちらも \(\log\) で発散。</p>
+      <p><b>対数が入ったら置換：</b>\(u=\log x\)（\(du=dx/x\)）で、上の基本形に持ち込める。積分区間が \(u\) でどこに移るか（有限か \(\pm\infty\) か）を必ず確認。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問5-1.</span> \(\displaystyle\int_0^1\frac{dx}{x^p}\) が収束する \(p\) の範囲を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順</span> 特異点は \(x=0\)。\(\epsilon>0\) で避けて \(p\ne1\) なら
+        \[ \int_\epsilon^1 x^{-p}\,dx=\Big[\frac{x^{1-p}}{1-p}\Big]_\epsilon^1=\frac{1-\epsilon^{1-p}}{1-p}. \]
+        \(\epsilon\to0\) で \(\epsilon^{1-p}\to\)（有限）\(\Leftrightarrow 1-p>0\Leftrightarrow p<1\)。\(p=1\) は \(\int x^{-1}=\log x\) で \(-\log\epsilon\to\infty\)（発散）。</p>
+        <div class="ans">\(p<1\)</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問5-2.</span> \(\displaystyle\int_1^\infty\frac{dx}{x^p}\) が収束する \(p\) の範囲を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順</span> 怪しいのは \(x\to\infty\)。\(p\ne1\) で \(\displaystyle\int_1^R x^{-p}dx=\Big[\frac{x^{1-p}}{1-p}\Big]_1^R=\frac{R^{1-p}-1}{1-p}\)。\(R\to\infty\) で有限 \(\Leftrightarrow R^{1-p}\to0\Leftrightarrow 1-p<0\Leftrightarrow p>1\)。\(p=1\) は \(\log R\to\infty\)（発散）。</p>
+        <div class="ans">\(p>1\)</div>
+        <p class="why">問5-1 と向きが逆。0の近くでは「べきが弱い方（\(p\) 小）」が助かり、∞では「べきが強い方（\(p\) 大）」が助かる。</p>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問5-3.</span> \(\displaystyle\int_2^\infty\frac{dx}{x(\log x)^p}\) が収束する \(p\) の範囲を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（置換）</span> \(u=\log x,\ du=\dfrac{dx}x\)。\(x=2\Rightarrow u=\log2,\ x\to\infty\Rightarrow u\to\infty\)。
+        \[ \int_2^\infty\frac{dx}{x(\log x)^p}=\int_{\log2}^\infty u^{-p}\,du. \]</p>
+        <p><span class="step">手順2</span> これは問5-2 と同じ形（下端 \(\log2>0\) は有限で問題なし）。よって \(u\to\infty\) で収束するのは \(p>1\)。</p>
+        <div class="ans">\(p>1\)</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問5-4.</span> \(m\) を整数とする。\(\displaystyle\lim_{\epsilon\to0}\int_\epsilon^{1/2}\frac{dx}{x(\log x)^m}\) が収束する \(m\) の範囲を求めよ。（2022D 問3）</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（置換と区間の確認）</span> \(u=\log x\)。\(x=\tfrac12\Rightarrow u=-\log2\ (<0)\)、\(x=\epsilon\to0\Rightarrow u=\log\epsilon\to-\infty\)。区間全体で \(u<0\)（\(x\in(0,\tfrac12]\) では \(\log x<0\)、しかも \(0\) にならない＝分母は消えない）。
+        \[ \int_\epsilon^{1/2}\frac{dx}{x(\log x)^m}=\int_{\log\epsilon}^{-\log2}u^{-m}\,du. \]</p>
+        <p><span class="step">手順2（怪しい端は \(u\to-\infty\)）</span> 上端 \(-\log2\) は有限で問題なし。収束は下端 \(u\to-\infty\) の挙動だけで決まる。\(\displaystyle\int_{-\infty}^{-\log2}|u|^{-m}\,du\) は「\(\infty\) での \(x^{-p}\)」型（問5-2）で、\(m>1\) のとき収束。</p>
+        <p><span class="step">手順3</span> \(m\) は整数なので \(m>1\Leftrightarrow m\ge2\)。（\(m=1\) は \(\log|u|\) で発散、\(m\le0\) は \(|u|^{-m}=|u|^{|m|}\) が増大して発散。）</p>
+        <div class="ans">\(m\ge2\)</div>
+        <p class="note">過去問は \((\log x)^m\) だが、区間で \(\log x<0\) のため \(m\) が奇数でも被積分関数は符号一定にならないだけで、収束判定（\(|u|^{-m}\) のオーダー）は同じ。結論は \(m\ge2\)。</p>
+      </div></details></div>
+  </section>
+
+  <!-- ===== テーマ6 ===== -->
+  <section class="theme" id="t6">
+    <h2>テーマ6 ── ガンマ関数と関連積分</h2>
+    <p class="covers">対応する過去問：2025L 問3</p>
+    <details class="tip">
+      <summary>解法のポイント ── なぜ &amp; どうやって（クリックで展開）</summary>
+      <p><b>定義：</b>\(\displaystyle\Gamma(s)=\int_0^\infty e^{-x}x^{s-1}\,dx\ (s>0)\)。「\(e^{-x}\times\)べき」を \(0\) から \(\infty\) まで積分した量。</p>
+      <p><b>2本の武器：</b><br>
+      ① 漸化式 \(\Gamma(s+1)=s\Gamma(s)\)（部分積分で示す）。これと \(\Gamma(1)=1\) から \(\Gamma(n+1)=n!\)。<br>
+      ② \(\Gamma(\tfrac12)=\sqrt\pi\)。これと漸化式で半整数の \(\Gamma\) が全部出る（\(\Gamma(\tfrac32)=\tfrac12\sqrt\pi\) など）。</p>
+      <p><b>ガウス型積分は置換で \(\Gamma\) に：</b>\(\int_0^\infty e^{-x^2}(\cdots)\,dx\) は \(x=t^{1/2}\)（または \(t=x^2\)）で指数を \(e^{-t}\) に直すと \(\Gamma\) が現れる。</p>
+    </details>
+
+    <div class="prob"><p class="q"><span class="num">問6-1.</span> \(\Gamma(s+1)=s\Gamma(s)\)（\(s>0\)）を部分積分で示せ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順1（部分積分の設定）</span> \(\Gamma(s+1)=\displaystyle\int_0^\infty x^s e^{-x}\,dx\)。\(u=x^s,\ dv=e^{-x}dx\) とおくと \(du=sx^{s-1}dx,\ v=-e^{-x}\)。
+        \[ \Gamma(s+1)=\Big[-x^s e^{-x}\Big]_0^\infty+\int_0^\infty s x^{s-1}e^{-x}\,dx. \]</p>
+        <p><span class="step">手順2（境界項の評価）</span> \(x\to\infty\)：指数 \(e^{-x}\) が多項式 \(x^s\) より速く \(0\) に行くので \(x^se^{-x}\to0\)。\(x\to0\)：\(s>0\) より \(x^s\to0\)。よって \(\big[-x^se^{-x}\big]_0^\infty=0\)。</p>
+        <p><span class="step">手順3</span> 残る積分は \(s\displaystyle\int_0^\infty x^{s-1}e^{-x}dx=s\Gamma(s)\)。</p>
+        <div class="ans">\(\Gamma(s+1)=s\Gamma(s)\)（したがって \(\Gamma(n+1)=n\Gamma(n)=\cdots=n!\)）</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問6-2.</span> \(\Gamma(\tfrac12)=\sqrt\pi\) を用いて次を求めよ。(a) \(\displaystyle\int_0^\infty e^{-x^2}dx\)　(b) \(\displaystyle\int_0^\infty x^2e^{-x^2}dx\)。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">(a) 手順1（\(\Gamma(\tfrac12)\) を変形）</span> \(\Gamma(\tfrac12)=\displaystyle\int_0^\infty e^{-x}x^{-1/2}dx\)。ここで \(x=t^2\)（\(dx=2t\,dt,\ x^{-1/2}=t^{-1}\)）と置換：
+        \[ \Gamma(\tfrac12)=\int_0^\infty e^{-t^2}\cdot t^{-1}\cdot 2t\,dt=2\int_0^\infty e^{-t^2}\,dt. \]
+        <span class="step">手順2</span> よって \(\displaystyle\int_0^\infty e^{-t^2}dt=\tfrac12\Gamma(\tfrac12)=\dfrac{\sqrt\pi}2\)。</p>
+        <p><span class="step">(b)</span> \(t=x^2\)（\(dt=2x\,dx\Rightarrow dx=\dfrac{dt}{2\sqrt t}\)、\(x^2=t\)）で
+        \[ \int_0^\infty x^2 e^{-x^2}dx=\int_0^\infty t\,e^{-t}\frac{dt}{2\sqrt t}=\frac12\int_0^\infty t^{1/2}e^{-t}\,dt=\frac12\Gamma(\tfrac32). \]
+        漸化式で \(\Gamma(\tfrac32)=\tfrac12\Gamma(\tfrac12)=\tfrac12\sqrt\pi\)。よって \(\tfrac12\cdot\tfrac12\sqrt\pi\)。</p>
+        <div class="ans">(a) \(\displaystyle\int_0^\infty e^{-x^2}dx=\frac{\sqrt\pi}{2}\)　(b) \(\displaystyle\int_0^\infty x^2e^{-x^2}dx=\frac{\sqrt\pi}{4}\)</div>
+      </div></details></div>
+
+    <div class="prob"><p class="q"><span class="num">問6-3.</span> \(a>0\) のとき \(\displaystyle\int_0^\infty e^{-ax^2}dx\) を求めよ。</p>
+      <details class="sol"><summary></summary><div class="body">
+        <p><span class="step">手順（スケール変換）</span> 指数を \(e^{-t^2}\) の形に揃える。\(t=\sqrt a\,x\)（\(dx=\dfrac{dt}{\sqrt a}\)）とおくと \(ax^2=t^2\) で
+        \[ \int_0^\infty e^{-ax^2}dx=\frac1{\sqrt a}\int_0^\infty e^{-t^2}dt=\frac1{\sqrt a}\cdot\frac{\sqrt\pi}2. \]</p>
+        <div class="ans">\(\displaystyle\int_0^\infty e^{-ax^2}dx=\frac12\sqrt{\frac\pi a}\)</div>
+        <p class="why">(a) の結果を「部品」として使う典型。まず基準の \(\int_0^\infty e^{-t^2}dt=\tfrac{\sqrt\pi}2\) を出し、スケール変換で一般化する。</p>
+      </div></details></div>
+  </section>
+
+  <p style="text-align:center;color:var(--muted);font-size:.82rem;margin:30px 0">
+    全問の答えは sympy／数値積分で検算済み。過去問（本番用）は別ファイル「過去問解答.html」にあります。
+  </p>
+</div>
+
+<script>
+document.querySelectorAll('details.sol, details.method, details.tip').forEach(function(d){
+  d.addEventListener('toggle',function(){
+    if(d.open&&window.MathJax&&MathJax.typesetPromise&&!d.dataset.typeset){d.dataset.typeset='1';MathJax.typesetPromise([d]);}});
+});
+</script>
+</body>
+</html>
